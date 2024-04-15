@@ -85,5 +85,8 @@ This is the place for you to write reflections:
 ### Mandatory (Subscriber) Reflections
 
 #### Reflection Subscriber-1
+1. Pemakaian RwLock<> ketimbang Mutex<> di sini lebih cocok sebab RwLock<> membolehkan banyak thread baca variabel bersamaan, sedangkan Mutex<> cuma izin satu thread pakai variabel itu di satu waktu. Di kasus kita, daftar pemberitahuan bakal sering dibaca bareng sama banyak thread tanpa ada yang nulis. Kalau pakai Mutex<>, ini bisa lambatkan kerja sebab cuman satu thread yang bisa akses variabel tersebut sekalian.
+
+2. Kita pakai lazy_static yang ada di luar standar karena tujuannya buat jadikan variabel itu singleton, jadi cuma ada satu instance dalam program. Rust sendiri secara otomatis jadikan variabel static itu tak bisa diubah, beda sama Java yang masih memperbolehkan variabelnya diubah lewat fungsi statis. Rust ngelakuin ini biar aman saat kode dijalankan dengan banyak thread, sebab data yang nggak bisa diubah itu lebih gampang dijaga dan terhindar dari masalah ketika banyak thread yang coba akses bersamaan.
 
 #### Reflection Subscriber-2
