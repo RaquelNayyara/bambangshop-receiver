@@ -12,8 +12,6 @@ use crate::repository::notification::NotificationRepository;
 
 pub struct NotificationService;
 
-impl NotificationService;
-
 impl NotificationService {
     #[tokio::main]
     async fn subscribe_request(product_type: String) -> Result<SubscriberRequest> {
